@@ -31,19 +31,33 @@ function linkAction(){
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
 /*==================== REFRESH WORDS ====================*/
-const IAMA = ['Security Engineer', 'Software Developer', 'Techie']
-var i = 0;
-var syncRefresh = () => {
-    if (i == 3) {
-        i = 0;  
-        document.getElementById('IAMA').innerHTML = IAMA[i];
+const IAMA = ['Security Engineer', 'Software Developer', 'Techie'];
+let i = 0;
+let j = 0;
+let isDeleting = false;
+
+const syncRefresh = () => {
+    const currentText = IAMA[i];
+    if (isDeleting) {
+        document.getElementById('IAMA').innerHTML = currentText.substring(0, j);
+        j--;
+    } else {
+        document.getElementById('IAMA').innerHTML = currentText.substring(0, j) + '|';
+        j++;
     }
-    else {
-        document.getElementById('IAMA').innerHTML = IAMA[i];
-        i++;
+
+    if (j === currentText.length + 1) {
+        isDeleting = true;
+        j = currentText.length;
+    } else if (j === -1) {
+        isDeleting = false;
+        i = (i + 1) % IAMA.length;
+        j = 0;
     }
-    setTimeout(syncRefresh, 2000);
-}
+
+    setTimeout(syncRefresh, isDeleting ? 75 : 100); // Adjust the typing speed (50 milliseconds for deleting and 200 milliseconds for typing)
+};
+
 syncRefresh();
 
 /*==================== ACCORDION SKILLS ====================*/
