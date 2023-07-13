@@ -31,7 +31,7 @@ function linkAction(){
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
 /*==================== REFRESH WORDS ====================*/
-const IAMA = ['Security Engineer', 'Software Developer', 'Techie'];
+const IAMA = ['Security Professional', 'Software Developer', 'IT Guy'];
 let i = 0;
 let j = 0;
 let isDeleting = false;
